@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymleaf Tutorials</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"></link>
+</head>
+<body>
+	---- use of ~(fragment expression) symbol
+	<div th:replace="~{header::myheader}"></div>
+	
+	<div th:insert="~{header::myheader}"></div>
+	<hr/>
+	-------------------message expession--------------
+    <p th:text="#{college.name}"></p>
+	
+	
+	<p data-th-text="#{college.name}"></p>
+	<p th:utext="#{youtube.name}"></p>
+	
+	------------------variable expression------------
+	<h1> today is : [[${today}]]</h1>
+	<h3 th:text="${today}"> </h3>
+	
+	<hr/>
+	<h3 th:text="${student.id}"> </h3>
+	<h3 th:text="${student.name}"> </h3>	
+	<h3 th:text="${student.address}"> </h3>	
+	
+	
+	--------------selection expression  -------------------------
+<div th:object="${student}">	
+		<h3 > ID: [[*{id}]]</h3>
+		<h3 > Name: [[*{name}]]</h3>
+		<h3 > Address: [[*{address}]]</h3>
+		
+		
+		----------link reference for next page------------------
+		
+		<h3><a th:href="@{profile}"> click here</a></h3>
+		
+		<hr/>
+		-- giving id in profile-----------------------
+		
+		<h3><a th:href="@{'profile/'+${student.id}}"> passing with id </a></h3>
+	
+	</div>
+	<hr/>
+	---concating numbers-----------------------------
+	<p>
+		one plus one makes <span th:text="2+1"></span>
+	</p>
+	
+	
+	<hr/>
+	-- use of if else------------------------------
+	<div th:if="${status}==true"> print here </div>
+	
+	
+	<hr/>  
+	<h3> geeting msg from controller</h3>
+	<h2 th:text="${msg} +', my name is jack'"></h2>
+	<h2 th:text="|${msg}, my name is jack|"></h2>
+	----or can use like this----
+	<hr/>
+	[[${msg}]] , my number is 123
+	<hr/>
+	
+	<h3> use of th:with</h3>
+	<div th:with="num=${2+3}">
+		num=[[${num}]]
+		
+		<th:block th:with="even=${num%2==0}">
+			 ,is even=[[${even}]]
+		</th:block>
+		
+		
+	</div>
+	<hr/>
+	<h2> elvis operator (?	)</h2>
+	
+	[[${studnet2?.id}]]
+	
+	<hr/>
+	---- use of ~(fragment expression) symbol
+		<div th:replace="~{footer::myfooter}"></div>
+</body>
+</html>
